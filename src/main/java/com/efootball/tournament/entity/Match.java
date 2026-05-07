@@ -1,6 +1,8 @@
 package com.efootball.tournament.entity;
 
+import com.efootball.tournament.enums.MatchStatus;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 
@@ -21,6 +23,9 @@ public class Match extends BaseEntity {
     @ManyToOne(optional=false)
     @JoinColumn(name="away_team_id")
     private Team awayTeam;
+
+    @Enumerated(EnumType.STRING)
+    private MatchStatus status = MatchStatus.SCHEDULED;
 
     private Integer homeScore;
 

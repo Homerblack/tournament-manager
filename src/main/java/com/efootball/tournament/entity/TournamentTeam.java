@@ -1,24 +1,36 @@
 package com.efootball.tournament.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(
-        name = "tournamnet_teams",
+        name = "tournament_teams",
         uniqueConstraints = @UniqueConstraint(columnNames = {"tournament_id", "team_id"})
 )
+@Getter
+@Setter
+@NoArgsConstructor
 public class TournamentTeam extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tournament_id")
     private Tournament tournament;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "team_id")
     private Team team;
+
+    private Integer seedNumber;
+    private String groupName;
+
+    private boolean active = true;
 
     public Long getId() { return id; }
 

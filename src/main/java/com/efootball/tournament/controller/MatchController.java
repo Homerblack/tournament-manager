@@ -1,40 +1,60 @@
 package com.efootball.tournament.controller;
 
-
-import com.efootball.tournament.dto.CreateMatchRequest;
-import com.efootball.tournament.dto.MatchResponse;
-import com.efootball.tournament.dto.StandingResponse;
+import com.efootball.tournament.dto.request.*;
+import com.efootball.tournament.dto.response.*;
 import com.efootball.tournament.service.MatchService;
+import io.swagger.v3.oas.models.responses.ApiResponse;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/matches")
+@RequiredArgsConstructor
 public class MatchController {
 
     private final MatchService matchService;
 
-    public MatchController(MatchService matchService) {
-        this.matchService = matchService;
-    }
-
-    @PostMapping("/matches")
-    public MatchResponse create(@RequestBody CreateMatchRequest request) {
+    @PostMapping
+    public MatchResponse create(
+            @Valid @RequestBody CreateMatchRequest request) {
         return matchService.create(request);
     }
 
-    @GetMapping("/tournaments/{id}/matches")
-    public List<MatchResponse> getByTournament(@PathVariable Long id) {
-        return matchService.getByTournament(id);
-    }
-    @GetMapping("/tournaments/{id}/standings")
-    public List<StandingResponse> getStandings(@PathVariable Long id) {
-        return matchService.getStandings(id);
+    @GetMapping
+    public List<MatchResponse> getAll() {
+        return matchService.getAllMatches();
     }
 
-    @GetMapping("/matches/all")
-    public List<MatchResponse> getAllMatches() {
-        return matchService.getAllMatches();
+    @GetMapping("/{id}")
+    public MatchResponse getById(@PathVariable Long id) {
+        return matchService.getById(id);
+    }
+
+    @PutMapping("/{id}")
+    public MatchResponse update(
+            @PathVariable Long id,
+            @RequestBody UpdateMatchRequest request) {
+        return matchService.update(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public ApiErrorResponse delete(@PathVariable Long id) {
+        matchService.delete(id);
+        return new ApiErrorResponse("Match deleted successfully.");
+    }
+
+    @GetMapping("/tournament/{tournamentId}")
+    public List<MatchResponse> getByTournament(
+            @PathVariable Long tournamentId) {
+        return matchService.getByTournament(tournamentId);
+    }
+
+    @GetMapping("/tournament/{tournamentId}/standings")
+    public List<StandingResponse> standings(
+            @PathVariable Long tournamentId) {
+        return matchService.getStandings(tournamentId);
     }
 }

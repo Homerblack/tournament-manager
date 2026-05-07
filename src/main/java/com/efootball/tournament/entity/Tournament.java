@@ -1,7 +1,7 @@
 package com.efootball.tournament.entity;
 
 import jakarta.persistence.*;
-
+import com.efootball.tournament.enums.TournamnetStatus;
 import java.time.LocalDate;
 
 @Entity
@@ -16,6 +16,9 @@ public class Tournament extends BaseEntity{
     private String name;
 
     private String season;
+
+    @Enumerated(EnumType.STRING)
+    private TournamnetStatus status = TournamnetStatus.UPCOMING;
 
     private LocalDate startDate;
 
