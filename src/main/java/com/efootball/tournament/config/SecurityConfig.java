@@ -29,7 +29,8 @@ public class SecurityConfig {
 
                     config.setAllowedOrigins(
                             List.of("http://localhost:5173",
-                                    "https://tournament-manager-hm8d.onrender.com"
+                                    "https://tournament-manager-hm8d.onrender.com",
+                                    "https://abstournament.netlify.app"
                             ));
 
 
