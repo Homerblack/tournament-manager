@@ -33,7 +33,6 @@ public class SecurityConfig {
                                     "https://abstournament.netlify.app"
                             ));
 
-
                     config.setAllowedMethods(
                             List.of("GET", "POST", "PUT",
                                     "DELETE", "OPTIONS"));
