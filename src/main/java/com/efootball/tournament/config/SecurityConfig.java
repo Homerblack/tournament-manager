@@ -28,7 +28,10 @@ public class SecurityConfig {
                     CorsConfiguration config = new CorsConfiguration();
 
                     config.setAllowedOrigins(
-                            List.of("http://localhost:5173"));
+                            List.of("http://localhost:5173",
+                                    "https://tournament-manager-hm8d.onrender.com"
+                            ));
+
 
                     config.setAllowedMethods(
                             List.of("GET", "POST", "PUT",
@@ -42,7 +45,7 @@ public class SecurityConfig {
                 }))
 
                 .authorizeHttpRequests(auth -> auth
-
+                        .requestMatchers("/").permitAll()
                         .requestMatchers(
                                 "/api/users/login",
                                 "/api/users/register"
