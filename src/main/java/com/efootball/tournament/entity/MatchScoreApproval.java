@@ -27,7 +27,7 @@ public class MatchScoreApproval extends BaseEntity {
     private User submittedBy;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "match_id", unique = true)
+    @JoinColumn(name = "match_id")
     private Match match;
 
 
