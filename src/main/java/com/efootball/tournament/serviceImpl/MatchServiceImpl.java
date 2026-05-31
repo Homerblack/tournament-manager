@@ -69,6 +69,8 @@ public class MatchServiceImpl implements MatchService {
         match.setTournament(tournament);
         match.setHomeTeam(homeTeam);
         match.setAwayTeam(awayTeam);
+        match.setHomeTeamName(homeTeam.getName());
+        match.setAwayTeamName(awayTeam.getName());
         match.setMatchDate(request.getMatchDate());
 
         Match saved = matchRepository.save(match);

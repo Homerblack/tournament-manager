@@ -200,4 +200,29 @@ public class MatchScoreApprovalServiceImpl implements MatchScoreApprovalService 
 
         return response;
     }
+
+    @Override
+    public void quickUpdateScore(
+            Long matchId,
+            SubmitScoreRequest request
+    ) {
+
+        Match match = matchRepository.findById(matchId)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Match not found."
+                        ));
+
+        match.setHomeScore(
+                request.getHomeScore()
+        );
+
+        match.setAwayScore(
+                request.getAwayScore()
+        );
+
+        matchRepository.save(match);
+    }
+
+
 }

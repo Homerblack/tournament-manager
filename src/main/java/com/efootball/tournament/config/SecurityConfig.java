@@ -69,6 +69,10 @@ public class SecurityConfig {
                                 "/api/matches/**"
                         ).permitAll()
 
+                        .requestMatchers(
+                                "/api/match-approvals/**"
+                        ).permitAll()
+
                         .anyRequest().authenticated()
                 );
 

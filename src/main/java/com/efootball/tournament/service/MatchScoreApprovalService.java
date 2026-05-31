@@ -15,4 +15,6 @@ public interface MatchScoreApprovalService {
     void rejectScore(Long matchId,Long userId, RejectScoreRequest request);
 
     List<PendingApprovalResponse> getPendingApprovals();
+
+    void quickUpdateScore(Long matchId, SubmitScoreRequest request);
 }

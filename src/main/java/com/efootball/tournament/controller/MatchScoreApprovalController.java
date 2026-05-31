@@ -97,4 +97,25 @@ public class MatchScoreApprovalController {
                         .getPendingApprovals()
         );
     }
+
+    @PostMapping("/{matchId}/quick-update")
+    public ResponseEntity<String> quickUpdateScore(
+
+            @PathVariable Long matchId,
+
+            @Valid
+            @RequestBody
+            SubmitScoreRequest request
+    ) {
+
+        approvalService.quickUpdateScore(
+                matchId,
+                request
+        );
+
+        return ResponseEntity.ok(
+                "Score updated successfully."
+        );
+    }
+
 }

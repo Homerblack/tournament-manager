@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "matches")
+@Data
 public class Match extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,14 @@ public class Match extends BaseEntity {
     @JoinColumn(name="away_team_id")
     private Team awayTeam;
 
+
+    @Column(name="home_team_name")
+    private String homeTeamName;
+
+
+    @Column(name="away_team_name")
+    private String awayTeamName;
+
     @Enumerated(EnumType.STRING)
     private MatchStatus status = MatchStatus.SCHEDULED;
 
@@ -32,25 +41,5 @@ public class Match extends BaseEntity {
     private Integer awayScore;
 
     private LocalDate matchDate;
-
-    public Long getId() { return id; }
-
-    public Tournament getTournament() { return tournament; }
-    public void setTournament(Tournament tournament) { this.tournament = tournament; }
-
-    public Team getHomeTeam() { return homeTeam; }
-    public void setHomeTeam(Team homeTeam) { this.homeTeam = homeTeam; }
-
-    public Team getAwayTeam() { return awayTeam; }
-    public void setAwayTeam(Team awayTeam) { this.awayTeam = awayTeam; }
-
-    public Integer getHomeScore() { return homeScore; }
-    public void setHomeScore(Integer homeScore) { this.homeScore = homeScore; }
-
-    public Integer getAwayScore() { return awayScore; }
-    public void setAwayScore(Integer awayScore) { this.awayScore = awayScore; }
-
-    public LocalDate getMatchDate() { return matchDate; }
-    public void setMatchDate(LocalDate matchDate) { this.matchDate = matchDate; }
 
 }
